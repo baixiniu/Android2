@@ -36,7 +36,7 @@ class GetPictureDemo2 : AppCompatActivity() {
 
             serviceApi.downloadPicFromNet("http://pic41.nipic.com/20140509/4746986_145156378323_2.jpg")
                 .subscribeOn(Schedulers.newThread()) //在新线程中实现该方法
-                .map(Func1 { arg0 ->
+                .map(Func1  { arg0 ->
                         return@Func1 BitmapFactory.decodeStream(arg0.byteStream()) //返回一个bitmap对象
                 })
                 .observeOn(AndroidScheduler.mainThread()) //在Android主线程中展示

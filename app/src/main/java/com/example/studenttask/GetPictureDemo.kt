@@ -56,7 +56,7 @@ class GetPictureDemo : AppCompatActivity() {
              *
              * */
             getPictureResult.subscribeOn(Schedulers.newThread())
-                .map(Func1 { args0->
+                .map( Func1 { args0->
                     return@Func1 BitmapFactory.decodeStream(args0.byteStream())  //返回一个bitmap对象
                 })
                 .observeOn(AndroidScheduler.mainThread())//在Android主线程中展示
