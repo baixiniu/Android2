@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+//import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_list_students2.*
@@ -28,6 +29,10 @@ class ListStudents2 : AppCompatActivity() {
         //这是以前使用intent的
         var intent: Intent =getIntent();
         //Log.d("intent",intent.toString())
+        //if(intent.getSerializableExtra("studentList").toString().length==0)
+        var test:ArrayList<Student2>;
+        test=intent.getSerializableExtra("studentsList") as ArrayList<Student2>;
+            Log.d("A", " AAA" + test.size);
 
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
 
@@ -80,7 +85,12 @@ class ListStudents2 : AppCompatActivity() {
             val stream: FileInputStream = openFileInput("studentList.txt")
             val ois = ObjectInputStream(stream)
             var studentList:List<Student2> = ois.readObject() as List<Student2>
-            Log.d("students",studentList.toString());
+            Log.d("students", studentList.toString());
+            var linearLayoutManager = LinearLayoutManager(this);
+            listStudents2.layoutManager=linearLayoutManager;
+            var adapter= StudentsAdapter2(this, studentList);
+
+            listStudents2.adapter=adapter;
         }
         else{
             var students:ArrayList<Student2>;
@@ -101,6 +111,14 @@ class ListStudents2 : AppCompatActivity() {
         //Log.d("Students",""+students.size);
 
 
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        this.setIntent(intent)
+
+        spinner1.setSelection(0,true)
+        //设置默认值
     }
 }
 

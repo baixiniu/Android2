@@ -32,7 +32,7 @@ class PersonalCenter : AppCompatActivity() {
 
         val sharedPreferences: SharedPreferences =this.getSharedPreferences("user", MODE_PRIVATE);
         val editor: SharedPreferences.Editor =  sharedPreferences.edit();
-        editor.commit();
+        //editor.commit();
 
         //val intent=intent;
         PersonName.setText(sharedPreferences.getString("username",""));
@@ -42,6 +42,7 @@ class PersonalCenter : AppCompatActivity() {
         returnButton.setOnClickListener{
             val returnIntent=Intent(this, ListStudents2::class.java);
             this.startActivity(returnIntent);
+            //this.finish();
         }
 
         modifyButton.setOnClickListener{
@@ -117,10 +118,26 @@ class PersonalCenter : AppCompatActivity() {
                     }
                 })
 
+                //editor.clear();
+
                 editor.putString("username",username);
                 editor.putString("password",password);
+                editor.commit();
 
                 }
         }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        this.setIntent(intent)
+
+        val sharedPreferences: SharedPreferences =this.getSharedPreferences("user", MODE_PRIVATE);
+        val editor: SharedPreferences.Editor =  sharedPreferences.edit();
+        editor.commit();
+
+        //val intent=intent;
+        PersonName.setText(sharedPreferences.getString("username",""));
+        PersonPassword.setText(sharedPreferences.getString("password",""));
     }
 }

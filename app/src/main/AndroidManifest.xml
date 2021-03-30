@@ -20,9 +20,11 @@
         <activity android:name=".FragmentStaticDemo" />
         <activity
             android:name=".PersonalCenter"
+            android:launchMode="singleTask"
             android:label="个人信息" /> <!-- android:label="学生信息展示界面2" -->
         <activity
             android:name=".ListStudents2"
+            android:launchMode="singleTask"
             android:theme="@style/TitleTheme" />
         <activity
             android:name=".Login"
